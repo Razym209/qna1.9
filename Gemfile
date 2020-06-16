@@ -57,6 +57,7 @@ gem 'thinking-sphinx'
 
 gem 'mini_racer'
 
+gem 'sprockets', '3.6.3'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
