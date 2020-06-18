@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_13_080252) do
+ActiveRecord::Schema.define(version: 2020_03_29_680252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,15 +38,14 @@ ActiveRecord::Schema.define(version: 2019_09_13_080252) do
 
   create_table "answers", force: :cascade do |t|
     t.text "body"
-    t.bigint "question_id"
+    t.integer "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.bigint "author_id"
     t.boolean "best", default: false
-    t.index ["question_id"], name: "index_answers_on_question_id"
-    t.index ["user_id"], name: "index_answers_on_user_id"
+    t.index ["author_id"], name: "index_answers_on_author_id"
   end
-
+  
   create_table "authorizations", force: :cascade do |t|
     t.bigint "user_id"
     t.string "provider", null: false
@@ -79,7 +78,7 @@ ActiveRecord::Schema.define(version: 2019_09_13_080252) do
     t.index ["linkable_type", "linkable_id"], name: "index_links_on_linkable_type_and_linkable_id"
   end
 
-  create_table "oauth_access_grants", force: :cascade do |t|
+ create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
     t.bigint "application_id", null: false
     t.string "token", null: false
@@ -126,8 +125,8 @@ ActiveRecord::Schema.define(version: 2019_09_13_080252) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_questions_on_user_id"
+    t.bigint "author_id"
+    t.index ["author_id"], name: "index_questions_on_author_id"
   end
 
   create_table "rewards", force: :cascade do |t|
@@ -168,7 +167,7 @@ ActiveRecord::Schema.define(version: 2019_09_13_080252) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
+  
   create_table "votes", force: :cascade do |t|
     t.integer "value", null: false
     t.string "votable_type"
